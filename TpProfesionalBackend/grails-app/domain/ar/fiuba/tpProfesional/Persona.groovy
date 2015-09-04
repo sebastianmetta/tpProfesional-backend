@@ -11,4 +11,5 @@ class Persona {
     static constraints = {
 	nombre blanck:false
     }
+
 }
