@@ -1,0 +1,15 @@
+languaje: groovy
+
+jdk:
+  - oraclejdk7
+
+script: grails clean && grails upgrade --non-interactive && grails test-app --non-interactive --stacktrace  
+
+deploy:
+  provider: openshift
+  user: ja.rodriguez.vazquez@gmail.com
+  password:
+    secure: Xf0Zx6LUbUZ7+j2mCpAGBae2LvZXjEu20gFOFZq+qBn8ppnr1BKrJ62RKE9OpqnlMpPU3GZhT3Z3wjGJGHF6m6wJ8yid+xbyHovq3THvZrScsj4NTxAMTuZCyrB1zO0vU2kATA3JkVS2sIOoOcNeADIOEshTv8B3Kzsztw2H5ztx4TsgQadxhog6yi9IwpZ3tnqOLk2WxSXXD4n+LCpGCKd9P1qvHoM3KCgyieiapzN9tonY5elIb4l6d9/X19ZeB1vBFv4KttNjl7XKYEkmvDJTV6XUi7NyqthNX7o7XrylGToc+i5qAZ2iQupT4w3IaCGsVkEzEoPej0Fj1BmpGJAKyCIbMJ0Zk2lskr8h1ZVeCJEidC977E/r5TBbQR30keFiawaiJchge2tOpgBEcZMxnzzx3Z6e6I7YM82W1/4Q/O/dMWX1KGVaaqLTlXRJF7mPwJdZt9+m3waCx8cIbl9TM92HotdurCyNQGDR9TuvY744k7OT/kvmluGkYaKUYZDorm1BtnV8SjkSmx4aRd+yhb6x/6FBTWRSRocCF/T4ZeJjiZNqJ9m8fepQeSp9SuYc4elU38ddhLfsB5i0dRQ4ql+sKnkBSa/MMjd/L2IKDpbrF9CicxLCp3ekGQF12Z5rYAq0TwI9UXLR2zHk+jBztrCmOXQWCqji2ZFn6Sg=
+  app: backend
+  domain: gestionpacientes
+  skip_cleanup: true
