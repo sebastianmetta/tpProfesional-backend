@@ -8,7 +8,7 @@ before_script:
 - npm install -g bower
 - npm install -g tsd
 
-script: ./gradlew test
+script: ./gradlew clean test assemble
 
 deploy:
   provider: openshift
