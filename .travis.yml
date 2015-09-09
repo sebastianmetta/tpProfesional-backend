@@ -1,9 +1,14 @@
 languaje: groovy
 
 jdk:
-  - oraclejdk7
+- oraclejdk7
 
-script: grails clean && grails upgrade --non-interactive && grails test-app --non-interactive --stacktrace  
+before_script:
+- npm install -g grunt-cli
+- npm install -g bower
+- npm install -g tsd
+
+script: ./gradlew test
 
 deploy:
   provider: openshift
