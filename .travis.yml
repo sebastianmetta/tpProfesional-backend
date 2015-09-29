@@ -4,9 +4,9 @@ jdk:
 - oraclejdk7
 
 before_script:
-- chmod +x grailsw
+- chmod +x ./grailsw
  
-script: grailsw war --non-interactive target/ROOT.war
+script: ./grailsw war --non-interactive target/ROOT.war
 
 before_deploy:
 - git config --global user.email 'bot@travis-ci.com'
