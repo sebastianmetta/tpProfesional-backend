@@ -23,6 +23,8 @@
 
 # "temporary" build files
 /target
+/target-eclipse
 
 .project
 .classpath
+.settings
