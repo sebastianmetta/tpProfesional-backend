@@ -1,11 +1,5 @@
 #TP Profesional Backend
 
-##To start the app:
-
-####Install dependencies
-```
-```
-
 ####Run application
 ```
 $ grails run-app
@@ -15,3 +9,4 @@ $ grails run-app
 https://travis-ci.org/sebastianmetta/tpProfesional-backend/builds
 
 ## QA env
+http://backend-tpprofesional.rhcloud.com/

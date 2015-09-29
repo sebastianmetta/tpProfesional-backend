@@ -3,7 +3,17 @@ languaje: groovy
 jdk:
 - oraclejdk7
 
-script: ./grailsw war --non-interactive target/ROOT.war
+before_script:
+- chmod +x grailsw
+ 
+script: grailsw war --non-interactive target/ROOT.war
+
+before_deploy:
+- git config --global user.email 'bot@travis-ci.com'
+- git config --global user.name 'Bot - Travis CI'
+- git checkout $TRAVIS_BRANCH
+- git add -f target/*
+- git commit -am '[Travis] Deploy'
 
 deploy:
   provider: openshift
