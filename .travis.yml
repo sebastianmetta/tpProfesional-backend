@@ -3,12 +3,7 @@ languaje: groovy
 jdk:
 - oraclejdk7
 
-before_script:
-- npm install -g grunt-cli
-- npm install -g bower
-- npm install -g tsd
-
-script: ./gradlew clean test assemble
+script: ./grailsw war --non-interactive target/ROOT.war
 
 deploy:
   provider: openshift
