@@ -5,8 +5,8 @@ jdk:
 
 before_script:
 - chmod +x ./grailsw
- 
-script: ./grailsw war --non-interactive target/ROOT.war
+
+script: "./grailsw war --non-interactive target/ROOT.war"
 
 before_deploy:
 - git config --global user.email 'bot@travis-ci.com'
@@ -19,7 +19,8 @@ deploy:
   provider: openshift
   user: ja.rodriguez.vazquez@gmail.com
   password:
-    secure: Xf0Zx6LUbUZ7+j2mCpAGBae2LvZXjEu20gFOFZq+qBn8ppnr1BKrJ62RKE9OpqnlMpPU3GZhT3Z3wjGJGHF6m6wJ8yid+xbyHovq3THvZrScsj4NTxAMTuZCyrB1zO0vU2kATA3JkVS2sIOoOcNeADIOEshTv8B3Kzsztw2H5ztx4TsgQadxhog6yi9IwpZ3tnqOLk2WxSXXD4n+LCpGCKd9P1qvHoM3KCgyieiapzN9tonY5elIb4l6d9/X19ZeB1vBFv4KttNjl7XKYEkmvDJTV6XUi7NyqthNX7o7XrylGToc+i5qAZ2iQupT4w3IaCGsVkEzEoPej0Fj1BmpGJAKyCIbMJ0Zk2lskr8h1ZVeCJEidC977E/r5TBbQR30keFiawaiJchge2tOpgBEcZMxnzzx3Z6e6I7YM82W1/4Q/O/dMWX1KGVaaqLTlXRJF7mPwJdZt9+m3waCx8cIbl9TM92HotdurCyNQGDR9TuvY744k7OT/kvmluGkYaKUYZDorm1BtnV8SjkSmx4aRd+yhb6x/6FBTWRSRocCF/T4ZeJjiZNqJ9m8fepQeSp9SuYc4elU38ddhLfsB5i0dRQ4ql+sKnkBSa/MMjd/L2IKDpbrF9CicxLCp3ekGQF12Z5rYAq0TwI9UXLR2zHk+jBztrCmOXQWCqji2ZFn6Sg=
+    secure: 7r7cyRkbR9WKDUpgRP9yiUxvP0GxX7Mo4GI8mngUhb3TD5M/xsmCwtng46Xeq6qua7aon32IfxOQlSwHbQ6uk4P1qW8QPNqlN4YWAQstPCftjTM1mHkq3dJYPgHKB8NshAHHayX4vhApBmKW7MBGuu3lXVbPGp5WduZ5zp3HCAvOXCHfvPrU9amViHV43OAlpOkBm4fMbYGbabzDt3iR59oi16SSMJJAuOy+75gOEIn8fHz/gpa5AiZPae6wvPicZ4JljGTv2vP5z4aLOoh+/CmbCk+Bhar3NxL3qaXpdQ0DQy5yXplcIJEMuBxNkx/aLI4NKKSXvjmi9LtEWInOPZ1KRiWglnuRLNc+iYeG8VB436aulFLc12aXC/ZoS+PqALuDCGFL5EwEO4lLFPCuJ6zguVDzRUOgqFDBxLT71Sy2bwq9+b1tz/vsGqQ8Sl30Kx+caK3IJmIloZoKA7M0t7qZ794gDbcKGF59nUwAu0gZFWLwR/LzVqU3BVx04scg8unrHNUc12WLkBieUxumcgC1jN26v5PyGUHF18SjxswNAPKxP9BRxYnDZpwoONmG0CIXZ2+Mrzh1yww51WyO8iG0rQV4cb16iJ7OP5xd/oTWThDXLk190T76fa0+czaJ6tv8++/U8eLfZpzyLoluUkykESQ8Gsokd7rnxowdMTs=
   app: backend
-  domain: gestionpacientes
-  skip_cleanup: true
+  domain: tpprofesional
+  on:
+    repo: sebastianmetta/tpProfesional-backend
