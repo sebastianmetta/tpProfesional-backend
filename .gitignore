@@ -24,6 +24,7 @@
 # "temporary" build files
 /target
 /target-eclipse
+/bin
 
 .project
 .classpath
