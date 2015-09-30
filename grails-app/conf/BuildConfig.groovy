@@ -3,8 +3,8 @@ grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
 grails.project.work.dir = "target/work"
-grails.project.target.level = 1.6
-grails.project.source.level = 1.6
+grails.project.target.level = 1.8
+grails.project.source.level = 1.8
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
 grails.project.fork = [
@@ -12,13 +12,13 @@ grails.project.fork = [
     //  compile: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
 
     // configure settings for the test-app JVM, uses the daemon by default
-    test: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
+    test: [maxMemory: 1024, minMemory: 64, debug: false, daemon:true],
     // configure settings for the run-app JVM
-    run: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
+    run: [maxMemory: 1024, minMemory: 64, debug: false, forkReserve:false],
     // configure settings for the run-war JVM
-    war: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
+    war: [maxMemory: 1024, minMemory: 64, debug: false, forkReserve:false],
     // configure settings for the Console UI JVM
-    console: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256]
+    console: [maxMemory: 1024, minMemory: 64, debug: false]
 ]
 
 grails.project.dependency.resolver = "maven" // or ivy
@@ -61,12 +61,20 @@ grails.project.dependency.resolution = {
         compile ":scaffolding:2.1.2"
         compile ':cache:1.1.8'
         compile ":asset-pipeline:2.1.5"
-
+		
+		//Spring rest login
+		compile ":spring-security-core:2.0-RC4"
+		compile ":spring-security-rest:1.5.0.M2", {
+			excludes: 'spring-security-core'
+		}
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.8.1" // or ":hibernate:3.6.10.18"
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
 
+		//Spring rest login
+		runtime ":cors:1.1.6"
+		
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.9.0"
         //compile ":less-asset-pipeline:1.10.0"

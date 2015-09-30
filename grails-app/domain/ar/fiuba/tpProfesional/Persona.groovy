@@ -2,7 +2,7 @@ package ar.fiuba.tpProfesional
 
 import grails.rest.*
 
-@Resource(uri='/persona', formats=['json', 'xml'])
+@Resource()
 class Persona {
 
     String nombre
