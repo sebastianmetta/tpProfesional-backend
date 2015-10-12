@@ -1,11 +1,14 @@
 package ar.fiuba.tpProfesional.security
 
-class Person {
+
+class User {
 
 	transient springSecurityService
 
 	String username
 	String password
+	String email
+	String direccion
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
@@ -16,6 +19,8 @@ class Person {
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
+		email blank: true
+		direccion blank: true
 	}
 
 	static mapping = {
@@ -23,7 +28,7 @@ class Person {
 	}
 
 	Set<Authority> getAuthorities() {
-		PersonAuthority.findAllByPerson(this).collect { it.authority } as Set
+		UserAuthority.findAllByUser(this).collect { it.authority } as Set
 	}
 
 	def beforeInsert() {

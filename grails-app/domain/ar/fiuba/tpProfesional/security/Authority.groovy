@@ -2,6 +2,17 @@ package ar.fiuba.tpProfesional.security
 
 class Authority {
 
+	public enum AuthorityType{
+		R1,
+		R2,
+		R3,
+		R4,
+		ENFERMERO,
+		ADMINISTRATIVO,
+		JEFE_RESIDENTE,
+		MEDICO_CONSULTOR
+	}
+	
 	String authority
 
 	static mapping = {
@@ -9,6 +20,6 @@ class Authority {
 	}
 
 	static constraints = {
-		authority blank: false, unique: true
+		authority blank: false
 	}
 }

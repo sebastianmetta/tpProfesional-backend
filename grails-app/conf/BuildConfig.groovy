@@ -62,17 +62,26 @@ grails.project.dependency.resolution = {
         compile ':cache:1.1.8'
         compile ":asset-pipeline:2.1.5"
 		
-		//Spring rest login
+		// dependencias para spring security UI
+		compile ":mail:1.0.7"
+		compile ":jquery-ui:1.10.4"
+		compile ":famfamfam:1.0.1"
+		
+		// Spring security UI
+		compile ":spring-security-ui:1.0-RC2"
+		
+		// Spring rest login
 		compile ":spring-security-core:2.0-RC4"
 		compile ":spring-security-rest:1.5.0.M2", {
 			excludes: 'spring-security-core'
 		}
+		
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.8.1" // or ":hibernate:3.6.10.18"
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
 
-		//Spring rest login
+		// Dependencia para spring rest login
 		runtime ":cors:1.1.6"
 		
         // Uncomment these to enable additional asset-pipeline capabilities

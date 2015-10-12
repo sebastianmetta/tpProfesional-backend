@@ -141,22 +141,18 @@ log4j = {
 
 //Grails Cache config.
 grails.cache.enabled=true
-//grails.cache.proxyTargetClass	false
-//grails.cache.aopOrder	Ordered.LOWEST_PRECEDENCE
-//grails.cache.clearAtStartup	false
-//grails.cache.keyGenerator	"customCacheKeyGenerator"
 grails.cache.config = {
     cache {  name 'xauth-token'  }
 }
 
 // Added by the Spring Security Core plugin:
-grails.plugin.springsecurity.userLookup.userDomainClassName = 'ar.fiuba.tpProfesional.security.Person'
-grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'ar.fiuba.tpProfesional.security.PersonAuthority'
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'ar.fiuba.tpProfesional.security.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'ar.fiuba.tpProfesional.security.UserAuthority'
 grails.plugin.springsecurity.authority.className = 'ar.fiuba.tpProfesional.security.Authority'
 grails.plugin.springsecurity.requestMap.className = 'ar.fiuba.tpProfesional.security.Requestmap'
 grails.plugin.springsecurity.securityConfigType = 'InterceptUrlMap'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-    '/':                              ['permitAll'],
+    //'/':                              ['permitAll'],
     '/index':                         ['permitAll'],
     '/index.gsp':                     ['permitAll'],
     '/**/js/**':                      ['permitAll'],
@@ -164,18 +160,16 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/**/images/**':                  ['permitAll'],
     '/**/favicon.ico':                ['permitAll']]
 grails.plugin.springsecurity.interceptUrlMap = [
-    '/app/**':             ['permitAll'],
+    '/app/**':            ['permitAll'],
     '/**/js/**':          ['permitAll'],
     '/**/css/**':         ['permitAll'],
     '/**/images/**':      ['permitAll'],
     '/**/favicon.ico':    ['permitAll'],
-    '/api/login':          ['permitAll'],
-    '/api/validate':         ['permitAll'],
-    '/api/status':          ['permitAll'],
+    '/api/login':         ['permitAll'],
+    '/api/validate':      ['permitAll'],
+    '/api/status':        ['permitAll'],
+	'/registrar':         ['permitAll'],
     '/**':				  ['isFullyAuthenticated()']]
-
-//grails.plugin.springsecurity.useBasicAuth = true
-//grails.plugin.springsecurity.basic.realmName = "Ralph's Bait and Tackle"
 
 //cors config.
 cors.enabled=true
@@ -205,25 +199,6 @@ grails.plugin.springsecurity.rest.logout.endpointUrl='/api/logout'
 grails.plugin.springsecurity.rest.token.generation.useSecureRandom=true
 grails.plugin.springsecurity.rest.token.generation.useUUID=false
 
-//token storage
-// use memcached.
-//grails.plugin.springsecurity.rest.token.storage.useMemcached	false
-//grails.plugin.springsecurity.rest.token.storage.memcached.hosts	localhost:11211
-//grails.plugin.springsecurity.rest.token.storage.memcached.username	''
-//grails.plugin.springsecurity.rest.token.storage.memcached.password	''
-//grails.plugin.springsecurity.rest.token.storage.memcached.expiration	3600
-
-//use GROM
-//grails.plugin.springsecurity.rest.token.storage.useGorm	false
-//grails.plugin.springsecurity.rest.token.storage.gorm.tokenDomainClassName	null
-//grails.plugin.springsecurity.rest.token.storage.gorm.tokenValuePropertyName	tokenValue
-//grails.plugin.springsecurity.rest.token.storage.gorm.usernamePropertyName	username
-//class AuthenticationToken {
-//
-//	String tokenValue
-//	String username
-//}
-
 //use cache as storage
 grails.plugin.springsecurity.rest.token.storage.useGrailsCache=true
 grails.plugin.springsecurity.rest.token.storage.grailsCacheName='xauth-token'
@@ -233,14 +208,9 @@ grails.plugin.springsecurity.rest.token.rendering.usernamePropertyName='username
 grails.plugin.springsecurity.rest.token.rendering.authoritiesPropertyName='roles'
 grails.plugin.springsecurity.rest.token.rendering.tokenPropertyName='token'
 
-
 //token validate
 grails.plugin.springsecurity.rest.token.validation.useBearerToken = true
 
-//if disable 'Bearer', you can configure a custom header.
-//grails.plugin.springsecurity.rest.token.validation.useBearerToken = false
-//grails.plugin.springsecurity.rest.token.rendering.tokenPropertyName   access_token
-//grails.plugin.springsecurity.rest.token.validation.headerName = 'x-auth-token'
 grails.plugin.springsecurity.rest.token.validation.active=true
 grails.plugin.springsecurity.rest.token.validation.endpointUrl='/api/validate'
 
@@ -249,13 +219,11 @@ grails{
         springsecurity{
             filterChain{
                 chainMap = [
-                    '/api/guest/**': 'anonymousAuthenticationFilter,restTokenValidationFilter,restExceptionTranslationFilter,filterInvocationInterceptor',
-                    '/api/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter',  // Stateless chain
-                    '/**': 'JOINED_FILTERS,-restTokenValidationFilter,-restExceptionTranslationFilter'                                          // Traditional chain
-
-                    //	'/api/**':'JOINED_FILTERS,-exceptionTranslationFilter',
-                    //	'/api/**': 'statelessSecurityContextPersistenceFilter,logoutFilter,authenticationProcessingFilter,customBasicAuthenticationFilter,securityContextHolderAwareRequestFilter,rememberMeAuthenticationFilter,anonymousAuthenticationFilter,basicExceptionTranslationFilter,filterInvocationInterceptor',
-                    //	'/**': 'JOINED_FILTERS,-basicAuthenticationFilter,-basicExceptionTranslationFilter'
+					'/api/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter',  // Stateless chain
+					'/registrar/**': 'anonymousAuthenticationFilter,restTokenValidationFilter,restExceptionTranslationFilter,filterInvocationInterceptor',
+					'/role/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter',  // Stateless chain
+					'/registrationCode/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter',  // Stateless chain
+					'/securityInfo/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter',  // Stateless chain
                 ]
             }
             rest {
@@ -264,3 +232,29 @@ grails{
         }
     }
 }
+//token { validation { enableAnonymousAccess = true } }
+
+grails {
+	mail {
+		host = "smtp.gmail.com"
+		port = 465
+		username = "gp.churruca.avisos@gmail.com"
+		password = "tpprofesional2015"
+		props = ["mail.smtp.auth":"true",
+				"mail.smtp.socketFactory.port":"465",
+				"mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+				"mail.smtp.socketFactory.fallback":"false"]
+	}
+}
+
+//Customizacion del mail de registro.
+//TODO: Ver pantalla de confirmacion de registro. Mejorar el body del mail.
+//grails.plugin.springsecurity.ui.register.emailFrom = '...'
+grails.plugin.springsecurity.ui.register.emailSubject = 'Alta en el sistema'
+grails.plugin.springsecurity.ui.register.emailBody = '''
+Hola $user.username,<br/>
+<br/>
+Te enviamos este correo ya que solicitaste el alta en el sistema. <br/>
+Para confirmar el registro, por favor hace clic &nbsp;<a href="$url">aca</a>.<br/>
+Muchas gracias.
+'''
