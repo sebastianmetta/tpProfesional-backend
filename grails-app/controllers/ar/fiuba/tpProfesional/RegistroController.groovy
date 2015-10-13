@@ -10,11 +10,6 @@ import grails.plugin.springsecurity.SpringSecurityUtils;
 import grails.rest.RestfulController
 
 class RegistroController extends RestfulController {
-
-	def list() {
-		response.status = 200
-		render User.getAll() as JSON
-	}
 	
 	def save(RegistracionCommand registroCommand){
 		if (registroCommand.hasErrors()) {

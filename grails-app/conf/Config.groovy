@@ -1,3 +1,5 @@
+import org.apache.log4j.PatternLayout;
+
 // locations to search for config files that get merged into the main config;
 // config files can be ConfigSlurper scripts, Java properties files, or classes
 // in the classpath in ConfigSlurper format
@@ -117,26 +119,53 @@ environments {
 
 // log4j configuration
 log4j = {
-    // Example of changing the log pattern for the default console appender:
-    //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
+    def pattern = new PatternLayout("[%p] [%c{3}] %m%n")
 
-    error  'org.codehaus.groovy.grails.web.servlet',        // controllers
+    appenders {
+//        appender new DailyRollingFileAppender(
+//                        name:"file",
+//                        file:"${Holders.config.myconfig.myvariable.workdir}/app.log",
+//                        layout: pattern,
+//                        datePattern: "'.'yyyy-MM-dd")
+//
+//        rollingFile name:"stacktrace", 
+//                    file:"${Holders.config.myconfig.myvariable.workdir}/stacktrace.log", 
+//                    maxFileSize:'100KB'
+        
+        console name:"stdout",
+                layout: pattern
+    }
+
+    root { 
+        environments {
+            production {
+                error "file"
+            }
+            development {
+                //error "file", "stdout"
+				error "stdout"
+            }
+        }
+    }
+
+    error   'org.codehaus.groovy.grails.web.servlet',        // controllers
             'org.codehaus.groovy.grails.web.pages',          // GSP
             'org.codehaus.groovy.grails.web.sitemesh',       // layouts
             'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
             'org.codehaus.groovy.grails.web.mapping',        // URL mapping
             'org.codehaus.groovy.grails.commons',            // core / classloading
-            'org.codehaus.groovy.grails.plugin',            // plugins
+            'org.codehaus.groovy.grails.plugins',            // plugins
             'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
             'org.springframework',
             'org.hibernate',
             'net.sf.ehcache.hibernate'
-    debug 	'ar.fiuba',
-            'org.springframework.security',
-            'grails.plugin.springsecurity'
+
+    warn    'org.springframework',
+            'org.hibernate',
+            'grails.plugins.springsecurity',
+            'groovyx.net.http'
+
+    all     'grails.app'
 }
 
 //Grails Cache config.

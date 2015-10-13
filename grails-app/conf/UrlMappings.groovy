@@ -4,8 +4,14 @@ class UrlMappings {
 		"/api/status"(controller:"status", action:"index", method:"GET")
 
 		// RESTService api
-		"/registrar"(controller:"registro",parseRequest:true) {
-			action = [GET:"list", POST:"save"]
+		"/registro"(controller:"registro",parseRequest:true) {
+			action = [POST:"save"]
+		}
+		"/rol"(controller:"rol",parseRequest:true) {
+			action = [GET:"list"]
+		}
+		"/usuario"(controller:"usuario",parseRequest:true) {
+			action = [GET:"list"]
 		}
 		"/api/personas"(resources:"persona")
 				
