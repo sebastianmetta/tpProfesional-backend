@@ -11,6 +11,8 @@ class BootStrap {
 
 		log.info('Inicializando datos de la aplicación...')
 
+		Authority.findAll().each { it.delete(flush:true, failOnError:true) }
+		
 		//Roles disponibles
 		def autJefeResidente = new Authority(authority:AuthorityType.JEFE_RESIDENTE)
 		autJefeResidente.save(flush: true)
