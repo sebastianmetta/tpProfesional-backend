@@ -9,7 +9,7 @@ before_script:
 script: 
 - "./grailsw refresh-dependencies --non-interactive"
 - "./grailsw compile --non-interactive"
-- "./grailsw war --non-interactive webapps/ROOT.war"
+- "./grailsw dev war --non-interactive webapps/ROOT.war"
 
 before_deploy:
 - git config --global user.email 'bot@travis-ci.com'
