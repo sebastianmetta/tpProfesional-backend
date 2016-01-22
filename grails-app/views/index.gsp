@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<!--  <html>
 	<head>
 		<meta name="layout" content="main"/>
 		<title>Welcome to Grails</title>
@@ -119,4 +119,14 @@
 			</div>
 		</div>
 	</body>
+</html>
+-->
+<html>
+  <head>
+    <title>TP Profesional - Backend</title>
+  </head>
+  <body>
+    <p>¡Bienvenido!</p>
+    <p>El servicio backend se encuentra activo.</p>
+  </body>
 </html>
