@@ -1,6 +1,8 @@
 package ar.fiuba.tpProfesional.security
 
+import grails.rest.Resource;
 
+//@Resource(uri='api/users', formats=['json', 'xml'])
 class User {
 
 	transient springSecurityService
@@ -8,7 +10,10 @@ class User {
 	String username
 	String password
 	String email
-	String direccion
+	String dni
+	String nombreYApellido
+	String telefono
+	
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
@@ -20,7 +25,6 @@ class User {
 		username blank: false, unique: true
 		password blank: false
 		email blank: true
-		direccion blank: true
 	}
 
 	static mapping = {

@@ -17,12 +17,12 @@ class UsuarioController extends RestfulController {
 				id: it.id,
 				username: it.username,
 				email: it.email,
-				direccion: it.direccion,
+				dni: it.dni,
+				nombreYApellido: it.nombreYApellido,
+				telefono: it.telefono,
 			]
 		}
 		render(contentType: 'text/json', text: result as JSON)
-		
 	}
-
 }
 

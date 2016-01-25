@@ -195,9 +195,10 @@ grails.plugin.springsecurity.interceptUrlMap = [
     '/**/images/**':      ['permitAll'],
     '/**/favicon.ico':    ['permitAll'],
     '/api/login':         ['permitAll'],
-    '/api/validate':      ['permitAll'],
     '/api/status':        ['permitAll'],
-	'/registrar':         ['permitAll'],
+    '/api/registro':      ['permitAll'],
+	'/api/rol':           ['permitAll'],
+    '/api/validate':      ['permitAll'],
     '/**':				  ['isFullyAuthenticated()']]
 
 //cors config.
@@ -249,9 +250,9 @@ grails{
             filterChain{
                 chainMap = [
 					'/api/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter',  // Stateless chain
-					'/registrar/**': 'anonymousAuthenticationFilter,restTokenValidationFilter,restExceptionTranslationFilter,filterInvocationInterceptor',
-					'/role/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter',  // Stateless chain
-					'/registrationCode/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter',  // Stateless chain
+					//'/registrar/**': 'anonymousAuthenticationFilter,restTokenValidationFilter,restExceptionTranslationFilter,filterInvocationInterceptor',
+					//'/role/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter',  // Stateless chain
+					'/regiurlstrationCode/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter',  // Stateless chain
 					'/securityInfo/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter',  // Stateless chain
                 ]
             }

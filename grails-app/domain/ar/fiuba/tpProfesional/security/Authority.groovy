@@ -10,7 +10,7 @@ class Authority {
 		ENFERMERO,
 		ADMINISTRATIVO,
 		JEFE_RESIDENTE,
-		MEDICO_CONSULTOR
+		JEFE_PLANTA
 	}
 	
 	String authority

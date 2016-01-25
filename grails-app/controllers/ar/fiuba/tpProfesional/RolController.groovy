@@ -1,6 +1,7 @@
 package ar.fiuba.tpProfesional
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.http.HttpStatus;
 
 import ar.fiuba.tpProfesional.security.Authority;
 import ar.fiuba.tpProfesional.security.User;
@@ -19,8 +20,12 @@ class RolController extends RestfulController {
 			]
 		}
 		render(contentType: 'text/json', text: result as JSON)
-		
 	}
 
+	def notAllowed() {
+		// Return Method not allowed HTTP status code.
+		render status: HttpStatus.METHOD_NOT_ALLOWED.value()
+	}
+	
 }
 

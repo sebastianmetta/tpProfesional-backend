@@ -1,4 +1,4 @@
-package ar.fiuba.tpProfesional.controller
+package ar.fiuba.tpProfesional
 
 import grails.converters.JSON
 import grails.plugin.springsecurity.SpringSecurityUtils
