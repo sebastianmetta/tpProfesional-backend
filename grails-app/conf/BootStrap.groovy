@@ -1,6 +1,6 @@
 
+import util.CustomObjectMarshallers;
 import grails.util.Environment;
-import ar.fiuba.tpProfesional.Persona
 import ar.fiuba.tpProfesional.security.Authority
 import ar.fiuba.tpProfesional.security.Authority.AuthorityType;
 import ar.fiuba.tpProfesional.security.User
@@ -35,11 +35,6 @@ class BootStrap {
 		def autR4 = new Authority(authority:AuthorityType.R4)
 		autR4.save(flush: true)
 
-
-		new Persona(nombre:"Juan",apellido:"Perez").save()
-		new Persona(nombre:"Carlos",apellido:"La mona Gimenez").save()
-		new Persona(nombre:"Roberto",apellido:"Gomez Bolaños").save()
-
 		//Usuarios disponibles
 		def userJefeResidente = new User(username:"jeferesidente", password:"jeferesidente999", dni:"11.111.111", email:"mail1@gmail.com", nombreYApellido:"Usuario Jefe de residentes", telefono:"11-1111-1111")
 		userJefeResidente.save()
@@ -71,6 +66,8 @@ class BootStrap {
 
 
 	}
+	
+	 
 	
 	def destroy = {
 	}
