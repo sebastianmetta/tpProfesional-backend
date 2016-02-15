@@ -278,8 +278,6 @@ grails {
 }
 
 //Customizacion del mail de registro.
-//TODO: Ver pantalla de confirmacion de registro. Mejorar el body del mail.
-//grails.plugin.springsecurity.ui.register.emailFrom = '...'
 grails.plugin.springsecurity.ui.register.emailSubject = 'Alta en el sistema'
 grails.plugin.springsecurity.ui.register.emailBody = '''
 Hola $user.username,<br/>

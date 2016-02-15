@@ -1,7 +1,9 @@
 package ar.fiuba.tpProfesional.paciente
 
-import grails.validation.ValidationErrors;
+import grails.validation.ValidationErrors
+import groovy.transform.ToString
 
+@ToString
 @grails.validation.Validateable
 class PacienteCommand {
 	
@@ -15,6 +17,12 @@ class PacienteCommand {
 	static constraints = {
 		dni blank:false, unique:true
 		nombreYApellido blank:false
+		direccion blank:true, nullable:true
+		telefono blank:true, nullable:true
+		antecedentesFamiliares blank:true, nullable:true
+		observaciones blank:true, nullable:true
 	}
+	
+	
 }
 

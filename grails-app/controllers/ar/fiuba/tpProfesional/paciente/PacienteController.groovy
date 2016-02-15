@@ -9,13 +9,7 @@ import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class PacienteController {
-
-	//TODO: Revisar alta y actualización parámetros no opcionales.
-	//TODO: Implementar tests para cada método.
-	//TODO: Implementar consultas por query parameters (dny y nombreYApellido).
 	
-    //static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
 	def list() {
 		params.max = Math.min(params.max ? params.int('max') : 50, 200)
 		def list = Paciente.list(params)
@@ -114,6 +108,26 @@ class PacienteController {
 		render "Paciente eliminado"
     }
 
+	def find() {
+		def command = new PacienteCommand(request.JSON)
+		
+		log.debug("Buscando pacientes. Filtros: " + command.toString())
+		
+		def result = Paciente.createCriteria().list{
+			if (command.getDni() != null) {
+				ilike('dni', "%".concat(command.getDni()).concat("%"))
+			}
+			if (command.getNombreYApellido()!=null) {
+				ilike("nombreYApellido", "%".concat(command.getNombreYApellido().concat("%")))
+			}
+		}
+		
+		response.status = 200
+		withFormat {
+			json { render result as JSON }
+		}
+	}
+	
     protected void notFound() {
         request.withFormat {
             form multipartForm {
