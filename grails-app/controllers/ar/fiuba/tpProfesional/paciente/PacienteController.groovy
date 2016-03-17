@@ -23,13 +23,31 @@ class PacienteController {
     }
 	
 	def save(){
-		def command = new PacienteCommand(request.JSON)
+		def command
+		
+		try {
+			command = new PacienteCommand(request.JSON)
+		} catch (Exception e) {
+			response.status = 422
+			def error = [description: 'JSON inválido.'] 
+			render error as JSON
+			return
+		}
+		
 		command.validate()
 		if (command.hasErrors()) {
 			response.status = 422
 			render command.errors as JSON
 			return
 		} else {
+
+			Paciente pacienteExists = Paciente.findByDni(command.dni)
+			if (pacienteExists!=null) {
+				response.status = 422
+				def error = [description: 'Ya existe un paciente con el dni ingresado.']
+				render error as JSON
+				return
+			}
 			
 			Paciente pacienteToSave = new Paciente()
 			

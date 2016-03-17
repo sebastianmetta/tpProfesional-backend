@@ -57,7 +57,7 @@ class RegistroController extends RestfulController {
 			} else {
 				uA.save(flush: true)
 			}
-			response.status = 201
+			response.status = 200
 			//Para un recurso 'comun' se deberia devolver su url, ej: /user/1 pero en este caso ver que conviene.
 			render newUser as JSON
 		}
