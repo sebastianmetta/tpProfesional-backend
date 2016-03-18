@@ -5,14 +5,10 @@ import groovy.transform.ToString
 
 @ToString
 @grails.validation.Validateable
-class PacienteCommand {
+class PacienteFiltroCommand {
 	
 	String dni
 	String nombreYApellido
-	String direccion
-	String telefono
-	String antecedentesFamiliares
-	String observaciones
 	
 	static constraints = {
 		

@@ -13,9 +13,20 @@ import ar.fiuba.tpProfesional.security.User
 import ar.fiuba.tpProfesional.security.UserAuthority
 
 class RegistroController extends RestfulController {
-	//TODO: probar sacar el argumento
-	def save(RegistroCommand registroCommand){
-		def command = new RegistroCommand(request.JSON)
+	def save(){
+		
+		log.info("Procesando solicitud de registro: " + request.JSON)
+		
+		def command
+		try {			
+			command = new RegistroCommand(request.JSON)
+		} catch(Exception e) {
+			response.status = 422
+			def error = [description: 'JSON inválido.']
+			render error as JSON
+			return
+		}
+		
 		command.validate()
 		if (command.hasErrors()) {
 			response.status = 422

@@ -5,10 +5,11 @@ package ar.fiuba.tpProfesional.paciente
 import static org.springframework.http.HttpStatus.*
 import ar.fiuba.tpProfesional.security.RegistroCommand;
 import grails.converters.JSON;
+import grails.rest.RestfulController;
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
-class PacienteController {
+class PacienteController extends RestfulController {
 	
 	def list() {
 		params.max = Math.min(params.max ? params.int('max') : 50, 200)
@@ -23,113 +24,78 @@ class PacienteController {
     }
 	
 	def save(){
-		def command
+		log.info("Procesando peticion para crear paciente: " + request.JSON)
 		
-		try {
-			command = new PacienteCommand(request.JSON)
-		} catch (Exception e) {
+		Paciente pacienteToCreate = new Paciente(request.JSON)
+		pacienteToCreate.validate()
+		if (pacienteToCreate.hasErrors()) {
 			response.status = 422
-			def error = [description: 'JSON inválido.'] 
-			render error as JSON
+			render pacienteToCreate.errors as JSON
 			return
 		}
+		log.info("Creando paciente " + pacienteToCreate.id + ": " + pacienteToCreate.toString())
+		pacienteToCreate.save flush:true
 		
-		command.validate()
-		if (command.hasErrors()) {
-			response.status = 422
-			render command.errors as JSON
-			return
-		} else {
-
-			Paciente pacienteExists = Paciente.findByDni(command.dni)
-			if (pacienteExists!=null) {
-				response.status = 422
-				def error = [description: 'Ya existe un paciente con el dni ingresado.']
-				render error as JSON
-				return
-			}
-			
-			Paciente pacienteToSave = new Paciente()
-			
-			pacienteToSave.setDni(command.getDni())
-			pacienteToSave.setNombreYApellido(command.getNombreYApellido())
-			pacienteToSave.setDireccion(command.getDireccion())
-			pacienteToSave.setTelefono(command.getTelefono())
-			pacienteToSave.setAntecedentesFamiliares(command.getAntecedentesFamiliares())
-			pacienteToSave.setObservaciones(command.getObservaciones())
-			
-			if (pacienteToSave.hasErrors()){
-				response.status = 422
-				render pacienteToSave.errors
-				return
-			}
-			
-			log.info("Creando paciente: " + pacienteToSave.toString())
-			
-			pacienteToSave.save(flush: true)
-
-			response.status = 200
-			render pacienteToSave as JSON
-		}
+		response.status = 200
+		render pacienteToCreate as JSON
 	}
-	
-	
-    def edit(Paciente pacienteInstance) {
-        respond pacienteInstance
-    }
 
-    @Transactional
-    def update(Paciente pacienteInstance) {
-        if (pacienteInstance == null) {
-            notFound()
-            return
-        }
+    def update() {
+		log.info("Procesando peticion para actualizar paciente: " + request.JSON)
+		def command = new PacienteCommand(request.JSON)
 
-        def command = new PacienteCommand(request.JSON)
-		command.validate()
-		if (command.hasErrors()) {
+		Paciente pacienteToUpdate = Paciente.findByDni(command.getDni())
+		if (pacienteToUpdate == null) {
 			response.status = 422
-			render command.errors as JSON
+			renderErrorMessage("Dni no coincide.") 
 			return
 		}
-		
-		Paciente pacienteToUpdate = Paciente.get(pacienteInstance.id)
-		
 		pacienteToUpdate.setAntecedentesFamiliares(command.getAntecedentesFamiliares())
 		pacienteToUpdate.setDireccion(command.getDireccion())
 		pacienteToUpdate.setNombreYApellido(command.getNombreYApellido())
 		pacienteToUpdate.setObservaciones(command.getObservaciones())
 		pacienteToUpdate.setTelefono(command.getTelefono())
-		 
-		log.info("Actualizando paciente " + pacienteInstance.id + ": " + pacienteToUpdate.toString())
+			
+		pacienteToUpdate.validate()
+		if (pacienteToUpdate.hasErrors()) {
+			response.status = 422
+			render pacienteToUpdate.errors as JSON
+			return
+		}
 		
-        pacienteToUpdate.save flush:true
-
-        response.status = 200
+		log.info("Actualizando paciente " + pacienteToUpdate.id + ": " + pacienteToUpdate.toString())
+		
+		pacienteToUpdate.save flush:true
+		
+		response.status = 200
 		render pacienteToUpdate as JSON
+		
+		
     }
 
     @Transactional
     def delete(Paciente pacienteInstance) {
-
         if (pacienteInstance == null) {
             notFound()
             return
         }
-
 		log.info("Eliminando paciente " + pacienteInstance.id + ": " + pacienteInstance.toString())
-		
         pacienteInstance.delete flush:true
 
         response.status = 200
-		//TODO: Obtener de properties.
-		render "Paciente eliminado"
+        renderMessage("Paciente eliminado.")
     }
 
 	def find() {
-		def command = new PacienteCommand(request.JSON)
-		
-		log.debug("Buscando pacientes. Filtros: " + command.toString())
+		log.info("Buscando pacientes. Filtros: " + request.JSON)
+		def command
+		try {
+			command = new PacienteFiltroCommand(request.JSON)
+		} catch (Exception e) {
+			response.status = 422
+			renderErrorMessage('JSON invalido.')
+			return
+		}
 		
 		def result = Paciente.createCriteria().list{
 			if (command.getDni() != null) {
@@ -155,6 +121,16 @@ class PacienteController {
             '*'{ render status: NOT_FOUND }
         }
     }
+	
+	def renderErrorMessage(String message){
+		def messageToRender = [error: "$message"]
+		render messageToRender as JSON
+	}
+	
+	def renderMessage(String message){
+		def messageToRender = [descripcion: "$message"]
+		render messageToRender as JSON
+	}
 	
 	def notAllowed() {
 		render status: METHOD_NOT_ALLOWED
