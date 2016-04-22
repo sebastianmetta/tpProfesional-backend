@@ -33,7 +33,7 @@ class PacienteController extends RestfulController {
 			render pacienteToCreate.errors as JSON
 			return
 		}
-		log.info("Creando paciente " + pacienteToCreate.id + ": " + pacienteToCreate.toString())
+		log.info("Creando paciente: " + pacienteToCreate.toString())
 		pacienteToCreate.save flush:true
 		
 		response.status = 200
@@ -50,6 +50,7 @@ class PacienteController extends RestfulController {
 			renderErrorMessage("Dni no coincide.") 
 			return
 		}
+		pacienteToUpdate.setSexo(command.getSexo())
 		pacienteToUpdate.setAntecedentesFamiliares(command.getAntecedentesFamiliares())
 		pacienteToUpdate.setDireccion(command.getDireccion())
 		pacienteToUpdate.setNombreYApellido(command.getNombreYApellido())

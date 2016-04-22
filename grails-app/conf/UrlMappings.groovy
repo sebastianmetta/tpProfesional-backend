@@ -20,6 +20,7 @@ class UrlMappings {
 			action = [GET:"list"]
 		}
 		
+		//PACIENTES
 		"/api/paciente"(controller:"paciente", parseRequest:true) {
 			action = [GET:"list", POST:"save", DELETE:"notAllowed", PUT:"update"]
 		}
@@ -27,6 +28,17 @@ class UrlMappings {
 			action = [GET:"show", PUT:"update", DELETE:"delete"]
 		}
 		"/api/paciente/filtro"(controller:"paciente", parseRequest:true) {
+			action = [GET:"notAllowed", POST:"find", DELETE:"notAllowed", PUT:"notAllowed"]
+		}
+		
+		//CAMAS
+		"/api/cama"(controller:"cama", parseRequest:true) {
+			action = [GET:"list", POST:"save", DELETE:"notAllowed", PUT:"update"]
+		}
+		"/api/cama/$id?"(controller: "cama",parseRequest:true) {
+			action = [GET:"show", PUT:"update", DELETE:"delete"]
+		}
+		"/api/cama/filtro"(controller:"cama", parseRequest:true) {
 			action = [GET:"notAllowed", POST:"find", DELETE:"notAllowed", PUT:"notAllowed"]
 		}
 		

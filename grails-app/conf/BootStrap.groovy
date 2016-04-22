@@ -1,9 +1,12 @@
 
 import util.CustomObjectMarshallers;
 import grails.util.Environment;
+import ar.fiuba.tpProfesional.infraestructura.Cama;
+import ar.fiuba.tpProfesional.infraestructura.Habitacion;
+import ar.fiuba.tpProfesional.infraestructura.Sector;
 import ar.fiuba.tpProfesional.security.Authority
+import ar.fiuba.tpProfesional.security.User;
 import ar.fiuba.tpProfesional.security.Authority.AuthorityType;
-import ar.fiuba.tpProfesional.security.User
 import ar.fiuba.tpProfesional.security.UserAuthority
 
 class BootStrap {
@@ -15,9 +18,14 @@ class BootStrap {
 		
 		log.info('Inicializando datos de la aplicación...')
 
+		//Infraestructura
+		buildInfraestructura()
+		
 		Authority.findAll().each { it.delete(flush:true, failOnError:true) }
 		
 		//Roles disponibles
+		def autConsultorExterno = new Authority(authority:AuthorityType.CONSULTOR_EXTERNO)
+		autConsultorExterno.save(flush: true)
 		def autJefeResidente = new Authority(authority:AuthorityType.JEFE_RESIDENTE)
 		autJefeResidente.save(flush: true)
 		def autAdministrativo = new Authority(authority:AuthorityType.ADMINISTRATIVO)
@@ -36,6 +44,8 @@ class BootStrap {
 		autR4.save(flush: true)
 
 		//Usuarios disponibles
+		def userConsultorExterno = new User(username:"consujltorexterno", password:"consujltorexterno999", dni:"00.000.000", email:"mail0@gmail.com", nombreYApellido:"Usuario Consultor Externo", telefono:"00-0000-0000")
+		userConsultorExterno.save()
 		def userJefeResidente = new User(username:"jeferesidente", password:"jeferesidente999", dni:"11.111.111", email:"mail1@gmail.com", nombreYApellido:"Usuario Jefe de residentes", telefono:"11-1111-1111")
 		userJefeResidente.save()
 		def userAdministrativo = new User(username:"administrativo", password:"administrativo999", dni:"22.222.222", email:"mail2@gmail.com", nombreYApellido:"Ususario Administrativo", telefono:"22-2222-2222")
@@ -54,6 +64,7 @@ class BootStrap {
 		userR4.save()
 
 		//Le asignamos roles a los usuarios.
+		new UserAuthority(user:userConsultorExterno, authority:autConsultorExterno).save(flush: true)
 		new UserAuthority(user:userJefeResidente, authority:autJefeResidente).save(flush: true)
 		new UserAuthority(user:userAdministrativo, authority:autAdministrativo).save(flush: true)
 		new UserAuthority(user:userEnfermero, authority:autEnfermero).save(flush: true)
@@ -67,6 +78,39 @@ class BootStrap {
 
 	}
 	
+	def buildInfraestructura() {
+		
+		Habitacion h1 = new Habitacion(numero: 1, sector:Sector.HOMBRES)
+		Habitacion h2 = new Habitacion(numero: 2, sector:Sector.HOMBRES)
+		Habitacion h3 = new Habitacion(numero: 3, sector:Sector.MUJERES)
+		Habitacion h4 = new Habitacion(numero: 4, sector:Sector.MUJERES)
+		
+		Cama c1 = new Cama(numero: 1, descripcion:"Cama 1", observaciones:"Observaciones cama 1").save(flush: true)
+		Cama c2 = new Cama(numero: 2, descripcion:"Cama 2", observaciones:"Observaciones cama 2").save(flush: true)
+		Cama c3 = new Cama(numero: 3, descripcion:"Cama 3", observaciones:"Observaciones cama 3").save(flush: true)
+		Cama c4 = new Cama(numero: 4, descripcion:"Cama 4", observaciones:"Observaciones cama 4").save(flush: true)
+		Cama c5 = new Cama(numero: 5, descripcion:"Cama 5", observaciones:"Observaciones cama 5").save(flush: true)
+		Cama c6 = new Cama(numero: 6, descripcion:"Cama 6", observaciones:"Observaciones cama 6").save(flush: true)
+		Cama c7 = new Cama(numero: 7, descripcion:"Cama 7", observaciones:"Observaciones cama 7").save(flush: true)
+		Cama c8 = new Cama(numero: 8, descripcion:"Cama 8", observaciones:"Observaciones cama 8").save(flush: true)
+		
+		h1.getCamas().add(c1)
+		h1.getCamas().add(c2)
+		h1.save(flush: true)
+		
+		h2.getCamas().add(c3)
+		h2.getCamas().add(c4)
+		h2.save(flush: true)
+		
+		h3.getCamas().add(c5)
+		h3.getCamas().add(c6)
+		h3.save(flush: true)
+		
+		h4.getCamas().add(c7)
+		h4.getCamas().add(c8)
+		h4.save(flush: true)
+		
+	}
 	 
 	
 	def destroy = {

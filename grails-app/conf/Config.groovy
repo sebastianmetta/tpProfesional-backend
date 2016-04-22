@@ -160,6 +160,8 @@ log4j = {
             'org.hibernate',
             'net.sf.ehcache.hibernate'
 
+	//debug  'org.codehaus.groovy.grails.orm.hibernate.cfg'
+			
     warn    'org.springframework',
             'org.hibernate',
             'grails.plugins.springsecurity',

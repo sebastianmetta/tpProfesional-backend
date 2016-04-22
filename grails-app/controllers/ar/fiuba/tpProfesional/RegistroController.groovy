@@ -9,10 +9,13 @@ import grails.validation.Validateable
 import grails.validation.ValidationErrors;
 import ar.fiuba.tpProfesional.security.Authority
 import ar.fiuba.tpProfesional.security.RegistroCommand;
-import ar.fiuba.tpProfesional.security.User
+import ar.fiuba.tpProfesional.security.User;
 import ar.fiuba.tpProfesional.security.UserAuthority
 
 class RegistroController extends RestfulController {
+	
+	def usuarioService
+	
 	def save(){
 		
 		log.info("Procesando solicitud de registro: " + request.JSON)
@@ -40,8 +43,8 @@ class RegistroController extends RestfulController {
 				render g.message(code: 'validator.role.notExists') as JSON
 				return
 			}
-			User newUser = new User()
-
+			//User newUser = new User()
+			User newUser = usuarioService.createUser(command.getRoleId())
 			newUser.setUsername(command.getUsername())
 			newUser.setPassword(command.getPassword())
 			newUser.setEmail(command.getEmail())

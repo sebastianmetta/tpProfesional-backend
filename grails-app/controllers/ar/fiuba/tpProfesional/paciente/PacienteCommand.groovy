@@ -9,6 +9,7 @@ class PacienteCommand {
 	
 	String dni
 	String nombreYApellido
+	String sexo
 	String direccion
 	String telefono
 	String antecedentesFamiliares

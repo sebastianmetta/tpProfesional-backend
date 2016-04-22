@@ -1,3 +1,4 @@
+import marshaller.CamaMarshaller
 import marshaller.PacienteMarshaller
 import org.springframework.web.servlet.LocaleResolver;
 
@@ -9,7 +10,8 @@ beans = {
 		bean.initMethod = 'register'
 		//Agregar aca todos los marshallers necesarios.
 		marshallers = [
-			new PacienteMarshaller()
+			new PacienteMarshaller(),
+			new CamaMarshaller()
 			]
 	}
 }

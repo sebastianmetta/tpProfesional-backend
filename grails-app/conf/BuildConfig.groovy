@@ -61,7 +61,9 @@ grails.project.dependency.resolution = {
         compile ":scaffolding:2.1.2"
         compile ':cache:1.1.8'
         compile ":asset-pipeline:2.1.5"
-		
+
+		compile "org.grails.plugins:joda-time:1.5"
+				
 		// dependencias para spring security UI
 		compile ":mail:1.0.7"
 		compile ":jquery-ui:1.10.4"
