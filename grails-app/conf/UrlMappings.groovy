@@ -42,6 +42,20 @@ class UrlMappings {
 			action = [GET:"notAllowed", POST:"find", DELETE:"notAllowed", PUT:"notAllowed"]
 		}
 		
+		//HABITACION
+		"/api/habitacion"(resources:"habitacion")
+		"/api/habitacion/filtro"(controller: "habitacion",parseRequest:true) {
+			action = [GET:"notAllowed", POST:"find", DELETE:"notAllowed", PUT:"notAllowed"]
+		}
+		
+		//INTERNACION PACIENTE
+		"/api/internacionpaciente"(controller:"internacionPaciente",parseRequest:true) {
+			action = [GET:"index", POST:"save", DELETE:"delete", PUT:"update"]
+		}
+		"/api/internacionpaciente/$id"(controller:"internacionPaciente",parseRequest:true) {
+			action = [GET:"show"]
+		} 
+		
         "/$controller/$action?/$id?(.${format})?"{
             constraints {
                 // apply constraints here

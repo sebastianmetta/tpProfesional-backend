@@ -20,7 +20,8 @@ class PacienteMarshaller {
 					direccion: paciente.direccion,
 					telefono: paciente.telefono,
 					antecedentesFamiliares: paciente.antecedentesFamiliares,
-					observaciones: paciente.observaciones
+					observaciones: paciente.observaciones,
+					internaciones: paciente.internaciones
 			]
 		}
 	}

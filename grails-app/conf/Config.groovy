@@ -266,25 +266,25 @@ grails{
 }
 //token { validation { enableAnonymousAccess = true } }
 
-grails {
-	mail {
-		host = "smtp.gmail.com"
-		port = 465
-		username = "gp.churruca.avisos@gmail.com"
-		password = "tpprofesional2015"
-		props = ["mail.smtp.auth":"true",
-				"mail.smtp.socketFactory.port":"465",
-				"mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
-				"mail.smtp.socketFactory.fallback":"false"]
-	}
-}
+//grails {
+//	mail {
+//		host = "smtp.gmail.com"
+//		port = 465
+//		username = "gp.churruca.avisos@gmail.com"
+//		password = "tpprofesional2015"
+//		props = ["mail.smtp.auth":"true",
+//				"mail.smtp.socketFactory.port":"465",
+//				"mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+//				"mail.smtp.socketFactory.fallback":"false"]
+//	}
+//}
 
 //Customizacion del mail de registro.
-grails.plugin.springsecurity.ui.register.emailSubject = 'Alta en el sistema'
-grails.plugin.springsecurity.ui.register.emailBody = '''
-Hola $user.username,<br/>
-<br/>
-Te enviamos este correo ya que solicitaste el alta en el sistema. <br/>
-Para confirmar el registro, por favor hace clic &nbsp;<a href="$url">aca</a>.<br/>
-Muchas gracias.
-'''
+//grails.plugin.springsecurity.ui.register.emailSubject = 'Alta en el sistema'
+//grails.plugin.springsecurity.ui.register.emailBody = '''
+//Hola $user.username,<br/>
+//<br/>
+//Te enviamos este correo ya que solicitaste el alta en el sistema. <br/>
+//Para confirmar el registro, por favor hace clic &nbsp;<a href="$url">aca</a>.<br/>
+//Muchas gracias.
+//'''

@@ -1,7 +1,10 @@
 package ar.fiuba.tpProfesional.infraestructura
 
+import grails.rest.Resource;
+
 import java.util.List;
 
+@Resource(formats=['json', 'xml'])
 class Habitacion {
 
 	int numero

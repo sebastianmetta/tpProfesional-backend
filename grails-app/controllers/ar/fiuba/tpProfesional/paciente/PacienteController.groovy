@@ -3,9 +3,8 @@ package ar.fiuba.tpProfesional.paciente
 
 
 import static org.springframework.http.HttpStatus.*
-import ar.fiuba.tpProfesional.security.RegistroCommand;
-import grails.converters.JSON;
-import grails.rest.RestfulController;
+import grails.converters.JSON
+import grails.rest.RestfulController
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
@@ -47,7 +46,7 @@ class PacienteController extends RestfulController {
 		Paciente pacienteToUpdate = Paciente.findByDni(command.getDni())
 		if (pacienteToUpdate == null) {
 			response.status = 422
-			renderErrorMessage("Dni no coincide.") 
+			renderErrorMessage("El Dni enviado no existe.") 
 			return
 		}
 		pacienteToUpdate.setSexo(command.getSexo())

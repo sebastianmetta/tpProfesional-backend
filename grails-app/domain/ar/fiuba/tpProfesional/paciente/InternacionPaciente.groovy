@@ -1,10 +1,10 @@
 package ar.fiuba.tpProfesional.paciente
 
-import java.util.List;
+import grails.rest.Resource
+import ar.fiuba.tpProfesional.infraestructura.Cama
+import ar.fiuba.tpProfesional.paciente.estado.EstadoPaciente
 
-import ar.fiuba.tpProfesional.infraestructura.Cama;
-import ar.fiuba.tpProfesional.paciente.estado.EstadoPaciente;
-
+@Resource(formats=['json', 'xml'])
 class InternacionPaciente {
 
 	Date fechaInternacion
@@ -28,5 +28,8 @@ class InternacionPaciente {
     static constraints = {
 		fechaInternacion blank:false, nullable:false
 		origenInternacion blank:false, nullable:false
+		patologia nullable:true
+		diagnostico nullable:true
+		altaPaciente nullable:true
     }
 }
