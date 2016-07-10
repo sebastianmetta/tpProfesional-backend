@@ -15,8 +15,9 @@ class PacienteMarshaller {
 			return [
 					id : paciente.id,
 					dni: paciente.dni,
-					sexo: paciente.sexo,
 					nombreYApellido: paciente.nombreYApellido,
+					fechaNacimiento: paciente.fechaNacimiento,
+					sexo: paciente.sexo,
 					direccion: paciente.direccion,
 					telefono: paciente.telefono,
 					antecedentesFamiliares: paciente.antecedentesFamiliares,

@@ -9,6 +9,7 @@ class Paciente {
 
 	String dni
 	String nombreYApellido
+	Date fechaNacimiento
 	String sexo
 	String direccion
 	String telefono
@@ -21,6 +22,7 @@ class Paciente {
     static constraints = {
 		dni blank:false, unique:true
 		nombreYApellido blank:false
+		fechaNacimiento blank:false, nullable: false
 		sexo blank:false, nullable:false
 		direccion blank:true, nullable:true
 		telefono blank:true, nullable:true

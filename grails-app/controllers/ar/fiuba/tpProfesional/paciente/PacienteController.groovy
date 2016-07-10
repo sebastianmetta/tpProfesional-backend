@@ -3,6 +3,7 @@ package ar.fiuba.tpProfesional.paciente
 
 
 import static org.springframework.http.HttpStatus.*
+import ar.fiuba.tpProfesional.DateUtils;
 import grails.converters.JSON
 import grails.rest.RestfulController
 import grails.transaction.Transactional
@@ -49,6 +50,7 @@ class PacienteController extends RestfulController {
 			renderErrorMessage("El Dni enviado no existe.") 
 			return
 		}
+		pacienteToUpdate.setFechaNacimiento(DateUtils.stringToDate(command.getFechaNacimiento(),DateUtils.DD_MM_YYYY))
 		pacienteToUpdate.setSexo(command.getSexo())
 		pacienteToUpdate.setAntecedentesFamiliares(command.getAntecedentesFamiliares())
 		pacienteToUpdate.setDireccion(command.getDireccion())
