@@ -1,6 +1,8 @@
 package ar.fiuba.tpProfesional.infraestructura
 
 import static org.springframework.http.HttpStatus.*
+import ar.fiuba.tpProfesional.infraestructura.command.CamaCommand;
+import ar.fiuba.tpProfesional.infraestructura.command.CamaFiltroCommand;
 import ar.fiuba.tpProfesional.paciente.Paciente
 import grails.converters.JSON;
 import grails.rest.RestfulController;

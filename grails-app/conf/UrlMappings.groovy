@@ -30,6 +30,10 @@ class UrlMappings {
 		"/api/paciente/filtro"(controller:"paciente", parseRequest:true) {
 			action = [GET:"notAllowed", POST:"find", DELETE:"notAllowed", PUT:"notAllowed"]
 		}
+		"/api/paciente/internacion/filtro"(controller:"paciente", parseRequest:true) {
+			action = [GET:"notAllowed", POST:"findByInternacion", DELETE:"notAllowed", PUT:"notAllowed"]
+		}
+		
 		
 		//CAMAS
 		"/api/cama"(controller:"cama", parseRequest:true) {

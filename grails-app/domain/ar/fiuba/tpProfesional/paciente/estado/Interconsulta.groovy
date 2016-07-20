@@ -10,6 +10,9 @@ class Interconsulta extends EstadoPaciente {
 	String indicaciones
 
     static constraints = {
-		medicoSolicitante nullable:false, blank:false 
+		medicoSolicitante nullable:false, blank:false
+		medicoConsultado nullable:false, blank:false
+		resultado nullable:false, blank:false
+		indicaciones nullable:false, blank:false
     }
 }

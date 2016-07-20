@@ -1,4 +1,4 @@
-package ar.fiuba.tpProfesional.infraestructura
+package ar.fiuba.tpProfesional.infraestructura.command
 
 import ar.fiuba.tpProfesional.paciente.Paciente;
 import groovy.transform.ToString;

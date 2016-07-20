@@ -3,7 +3,14 @@ package ar.fiuba.tpProfesional.paciente
 
 
 import static org.springframework.http.HttpStatus.*
+
+import org.codehaus.groovy.util.StringUtil;
+import org.springframework.util.StringUtils;
+
 import ar.fiuba.tpProfesional.DateUtils;
+import ar.fiuba.tpProfesional.paciente.command.InternacionPacienteFiltroCommand;
+import ar.fiuba.tpProfesional.paciente.command.PacienteCommand;
+import ar.fiuba.tpProfesional.paciente.command.PacienteFiltroCommand;
 import grails.converters.JSON
 import grails.rest.RestfulController
 import grails.transaction.Transactional
@@ -111,6 +118,45 @@ class PacienteController extends RestfulController {
 		response.status = 200
 		withFormat {
 			json { render result as JSON }
+		}
+	}
+	
+	def findByInternacion() {
+		log.info("Buscando internaciones de pacientes. Filtros: " + request.JSON)
+		def command
+		try {
+			command = new InternacionPacienteFiltroCommand(request.JSON)
+		} catch (Exception e) {
+			response.status = 422
+			renderErrorMessage('JSON invalido.')
+			return
+		}
+		
+		//TODO: 1. Ver porque en el json de internaciones no estan los estados.
+		//TODO: 2. Pendiente revisar que esto funcione adecuadamente. Ver primero Bootstrap.
+		def paciente = Paciente.findById(command.getIdPaciente())
+		def internaciones = null
+		if (paciente) {			
+			if (command.getConsultaTodas().equalsIgnoreCase("true")) {
+				log.info("Buscando todas las internaciones del paciente " + paciente.toString())
+				internaciones = paciente.getInternaciones()
+			} else if (command.getConsultaUltima().equalsIgnoreCase("true")) {
+				log.info("Buscando ultima internacion del paciente " + paciente.toString())
+				def sortedInternaciones = paciente.getInternaciones().sort{it.fechaInternacion}
+				internaciones = sortedInternaciones.last()
+			} else if (!StringUtils.isEmpty(command.getFechaInternacion())) {
+				log.info("Buscando internacion del paciente " + paciente.toString() + " para la fecha " + command.getFechaInternacion())
+				internaciones = paciente.getInternaciones().find { it -> it.fechaInternacion.equals(DateUtils.stringToDate(command.getFechaInternacion(),DateUtils.DD_MM_YYYY)) }
+			}
+		} else {
+			response.status = 422
+			renderErrorMessage('Id de paciente inexistente.')
+			return
+		}
+		
+		response.status = 200
+		withFormat {
+			json { render internaciones as JSON }
 		}
 	}
 	

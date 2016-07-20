@@ -7,12 +7,12 @@ import ar.fiuba.tpProfesional.paciente.estado.EstadoPaciente
 @Resource(formats=['json', 'xml'])
 class InternacionPaciente {
 
-	Date fechaInternacion
+	Date fechaInternacion = new Date()
 	OrigenInternacion origenInternacion
 	String patologia
-	List estadosActuales = new ArrayList()
-	List estadosAnteriores = new ArrayList()
-	Diagnostico diagnostico
+	List<EstadoPaciente> estadosActuales = new ArrayList()
+	List<EstadoPaciente> estadosAnteriores = new ArrayList()
+	List<Diagnostico> diagnosticos = new ArrayList()
 	AltaPaciente altaPaciente
 	List<Cama> camas = new ArrayList()
 	
@@ -22,6 +22,7 @@ class InternacionPaciente {
 	static hasMany = [
 		estadosActuales: EstadoPaciente,
 		estadosAnteriores: EstadoPaciente,
+		diagnosticos: Diagnostico, 
 		camas: Cama
 		]
 	
@@ -29,7 +30,6 @@ class InternacionPaciente {
 		fechaInternacion blank:false, nullable:false
 		origenInternacion blank:false, nullable:false
 		patologia nullable:true
-		diagnostico nullable:true
 		altaPaciente nullable:true
     }
 }

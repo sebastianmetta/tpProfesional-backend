@@ -4,6 +4,7 @@ import static org.springframework.http.HttpStatus.*
 
 import org.grails.datastore.gorm.finders.MethodExpression.InList;
 
+import ar.fiuba.tpProfesional.infraestructura.command.HabitacionFiltroCommand;
 import ar.fiuba.tpProfesional.paciente.Paciente;
 import grails.rest.RestfulController;
 import grails.transaction.Transactional

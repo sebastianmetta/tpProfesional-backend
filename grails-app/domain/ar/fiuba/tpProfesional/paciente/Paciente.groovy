@@ -30,6 +30,18 @@ class Paciente {
 		observaciones blank:true, nullable:true
     }
 	
+	/**
+	 * Obtiene la internación más reciente del paciente.
+	 * @return
+	 */
+	def getLastInternacion() {
+		if (internaciones!=null) {			
+			return internaciones.sort{a,b-> b.fechaInternacion<=>a.fechaInternacion}.first()
+		} else {
+			return null
+		}
+	}
+	
 	def firmarConformidadAlta(){
 		//TODO:  implementar.
 	}

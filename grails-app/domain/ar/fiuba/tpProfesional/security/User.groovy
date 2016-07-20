@@ -34,6 +34,11 @@ class User {
 	Set<Authority> getAuthorities() {
 		UserAuthority.findAllByUser(this).collect { it.authority } as Set
 	}
+	
+	/** getter for 1 authority by user architecture*/
+	Authority getAuthority() {
+		UserAuthority.findAllByUser(this).collect { it.authority }.first()
+	}
 
 	def beforeInsert() {
 		encodePassword()

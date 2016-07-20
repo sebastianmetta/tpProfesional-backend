@@ -13,13 +13,15 @@ class InternacionPacienteMarshaller {
 	void register() {
 		JSON.registerObjectMarshaller(InternacionPaciente) { InternacionPaciente internacionPaciente ->
 			return [
-					id: internacionPaciente.id,
-					fechaInternacion: DateUtils.dateToString(internacionPaciente.fechaInternacion, DateUtils.DD_MM_YYYY),
-					origenInternacion: internacionPaciente.origenInternacion.toString(),
-					patologia: internacionPaciente.patologia,
-					diagnostico: internacionPaciente.diagnostico,
-					//Se devuelve la ultima cama asociada (la actual)
-					idCama: internacionPaciente.camas.first()?.id,
+				id: internacionPaciente.getId(),
+				fechaInternacion: DateUtils.dateToString(internacionPaciente.getFechaInternacion(), DateUtils.DD_MM_YYYY),
+				origenInternacion: internacionPaciente.getOrigenInternacion().toString(),
+				cama: internacionPaciente.getCamas()?.first(),
+				patologia: internacionPaciente.getPatologia(),
+				diagnosticos: internacionPaciente.getDiagnosticos(),
+				estadosActuales: internacionPaciente.getEstadosActuales(),
+				estadosAnteriores: internacionPaciente.getEstadosAnteriores(),
+				altaPaciente: internacionPaciente.getAltaPaciente()
 			]
 		}
 	}

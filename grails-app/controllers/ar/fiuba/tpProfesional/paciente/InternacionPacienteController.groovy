@@ -7,6 +7,7 @@ import grails.converters.JSON
 import grails.rest.RestfulController
 import grails.transaction.Transactional
 import ar.fiuba.tpProfesional.InternacionPacienteService
+import ar.fiuba.tpProfesional.paciente.command.InternacionPacienteCommand;
 
 
 class InternacionPacienteController extends RestfulController {

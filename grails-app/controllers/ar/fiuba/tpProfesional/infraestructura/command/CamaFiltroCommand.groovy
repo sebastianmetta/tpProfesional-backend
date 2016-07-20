@@ -1,4 +1,4 @@
-package ar.fiuba.tpProfesional.infraestructura
+package ar.fiuba.tpProfesional.infraestructura.command
 
 import grails.validation.ValidationErrors
 import groovy.transform.ToString

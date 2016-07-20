@@ -1,6 +1,6 @@
 package ar.fiuba.tpProfesional.paciente.estado
 
-import ar.fiuba.tpProfesional.usuario.Medico;
+import ar.fiuba.tpProfesional.usuario.Medico
 
 class EstudioSolicitado extends EstadoPaciente {
 
